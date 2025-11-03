@@ -19,11 +19,9 @@ public class ScheduledUpdate implements UpdateStrategy {
 
     @Override
     public Weather updateData(String city) {
-        // initialize Builder and Director
         ConcreteWeatherBuilder builder = new ConcreteWeatherBuilder();
         WeatherDirector director = new WeatherDirector(builder);
 
-        // create initial weather
         latestWeather = director.construct(
                 city,
                 -10 + random.nextDouble() * 45,
@@ -32,7 +30,6 @@ public class ScheduledUpdate implements UpdateStrategy {
                 randomCondition()
         );
 
-        // schedule automatic updates every 5 seconds
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -46,7 +43,7 @@ public class ScheduledUpdate implements UpdateStrategy {
                 System.out.println("[Scheduled Update] Weather refreshed for: " + city);
                 System.out.println(latestWeather);
             }
-        }, 0, 1800000); // delay=0, repeat every 5 seconds
+        }, 0, 1800000);
 
         return latestWeather;
     }
