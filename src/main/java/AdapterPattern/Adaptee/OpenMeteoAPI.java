@@ -6,8 +6,21 @@ import java.io.*;
 
 public class OpenMeteoAPI {
     public JSONObject fetchWeather(String city) {
+        String urlString;
+
+        switch (city) {
+            case "Almaty" ->
+                    urlString = "https://api.open-meteo.com/v1/forecast?latitude=43.2220&longitude=76.8512&current_weather=true&hourly=relativehumidity_2m";
+            case "Astana" ->
+                    urlString = "https://api.open-meteo.com/v1/forecast?latitude=51.1694&longitude=71.4491&current_weather=true&hourly=relativehumidity_2m";
+            case "Shymkent" ->
+                    urlString = "https://api.open-meteo.com/v1/forecast?latitude=42.3417&longitude=69.5901&current_weather=true&hourly=relativehumidity_2m";
+            default -> {
+                return null;
+            }
+        }
+
         try {
-            String urlString = "https://api.open-meteo.com/v1/forecast?latitude=43.2&longitude=76.9&current_weather=true";
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");

@@ -1,27 +1,19 @@
 package StrategyPattern.Context;
 
-import BuilderPattern.Product.Weather;
 import StrategyPattern.Interface.UpdateStrategy;
 
 public class UpdateContext {
-    private UpdateStrategy strategy;
-    private String city;
+    private UpdateStrategy updateStrategy;
 
-    public UpdateContext() {
+    public UpdateContext(UpdateStrategy updateStrategy) {
+        this.updateStrategy = updateStrategy;
     }
 
-    public UpdateContext(UpdateStrategy strategy, String city) {
-        this.strategy = strategy;
-        this.city = city;
+    public void setUpdateStrategy(UpdateStrategy updateStrategy) {
+        this.updateStrategy = updateStrategy;
     }
 
-    public void setStrategy(UpdateStrategy strategy) { this.strategy = strategy; }
-    public void setCity(String city) { this.city = city; }
-
-    public Weather executeStrategy(String city) {
-        if (strategy == null) {
-            throw new IllegalStateException("No strategy set!");
-        }
-        return strategy.updateData(city);
+    public void performUpdate(String city) {
+        updateStrategy.updateWeather(city);
     }
 }

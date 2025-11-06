@@ -30,7 +30,7 @@ public class MainDemo {
 
             if (choice == 0) break;
 
-            System.out.print("Enter city (Almaty/Astana/Shymkent/Aktobe): ");
+            System.out.print("Enter city (Almaty/Astana/Shymkent): ");
             String city = sc.nextLine();
 
             switch (choice) {

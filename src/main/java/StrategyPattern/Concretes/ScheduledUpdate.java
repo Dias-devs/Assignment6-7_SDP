@@ -12,45 +12,46 @@ import java.util.TimerTask;
 
 
 public class ScheduledUpdate implements UpdateStrategy {
-
     private final Timer timer = new Timer();
     private final Random random = new Random();
-    private Weather latestWeather;
 
     @Override
-    public Weather updateData(String city) {
+    public Weather updateWeather(String city) {
         ConcreteWeatherBuilder builder = new ConcreteWeatherBuilder();
-        WeatherDirector director = new WeatherDirector(builder);
+        WeatherDirector director = new WeatherDirector();
 
-        latestWeather = director.construct(
+        director.constructWeather(
+                builder,
                 city,
-                -10 + random.nextDouble() * 45,
-                30 + random.nextDouble() * 70,
-                random.nextDouble() * 40,
+                -(random.nextDouble() * 50) + random.nextDouble() * 45,
+                random.nextDouble() * 100,
+                random.nextDouble() * 90,
                 randomCondition()
         );
 
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                latestWeather = director.construct(
+                director.constructWeather(
+                        builder,
                         city,
-                        -10 + random.nextDouble() * 45,
-                        30 + random.nextDouble() * 70,
-                        random.nextDouble() * 40,
+                        -(random.nextDouble() * 40) + random.nextDouble() * 40,
+                        random.nextDouble() * 100,
+                        random.nextDouble() * 90,
                         randomCondition()
                 );
                 System.out.println("[Scheduled Update] Weather refreshed for: " + city);
-                System.out.println(latestWeather);
+                System.out.println(builder.getResult());
             }
-        }, 0, 1800000);
+        }, 0, 3600000);
 
-        return latestWeather;
+        return builder.getResult();
     }
 
     private String randomCondition() {
-        String[] conditions = {"Sunny", "Cloudy", "Rainy", "Stormy", "Snowy"};
-        return conditions[random.nextInt(conditions.length)];
+        String[] conditions = {"Sunny", "Partially-Cloudy", "Cloudy", "Rainy", "Stormy", "Snowy"};
+        int condLength = conditions.length;
+        return conditions[random.nextInt(condLength)];
     }
 
     public void stop() {

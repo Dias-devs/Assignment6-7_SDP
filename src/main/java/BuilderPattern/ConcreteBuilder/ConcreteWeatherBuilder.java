@@ -11,7 +11,7 @@ public class ConcreteWeatherBuilder implements Builder {
     private String condition;
 
     @Override
-    public void setCity(String city) {
+    public void setCity (String city) {
         this.city = city;
     }
 
@@ -35,8 +35,7 @@ public class ConcreteWeatherBuilder implements Builder {
         this.condition = condition;
     }
 
-    @Override
-    public Weather build() {
+    public Weather getResult() {
         return new Weather(city, temperature, humidity, windSpeed, condition);
     }
 }

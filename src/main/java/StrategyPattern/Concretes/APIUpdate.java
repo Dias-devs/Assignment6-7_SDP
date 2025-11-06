@@ -8,7 +8,7 @@ public class APIUpdate implements UpdateStrategy {
     private final WeatherAPIAdapter adapter = new WeatherAPIAdapter();
 
     @Override
-    public Weather updateData(String city) {
+    public Weather updateWeather(String city) {
         return adapter.getWeatherData(city);
     }
 }

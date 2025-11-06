@@ -8,9 +8,11 @@ import StrategyPattern.Interface.UpdateStrategy;
 
 public class RealTimeUpdate implements UpdateStrategy {
     @Override
-    public Weather updateData(String city)  {
-        Builder builder = new ConcreteWeatherBuilder();
-        WeatherDirector director = new WeatherDirector(builder);
-        return director.construct(city, 18.5, 45, 10, "Rainy");
+    public Weather updateWeather(String city)  {
+        ConcreteWeatherBuilder builder = new ConcreteWeatherBuilder();
+        WeatherDirector director = new WeatherDirector();
+
+        director.constructWeather(builder, city, 18.5, 45, 10, "Rainy");
+        return builder.getResult();
     }
 }

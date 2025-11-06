@@ -11,7 +11,7 @@ public class WeatherStation implements Subject {
     private final List<Observer> observers = new ArrayList<>();
 
     @Override
-    public void registerObserver(Observer observer) {
+    public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
@@ -22,6 +22,7 @@ public class WeatherStation implements Subject {
 
     @Override
     public void notifyObservers(Weather weather) {
-        for (Observer o : observers) o.update(weather);
+        for (Observer observer : observers)
+            observer.update(weather);
     }
 }

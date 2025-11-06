@@ -7,7 +7,8 @@ public class Weather {
     private final double windSpeed;
     private final String condition;
 
-    public Weather(String city, double temperature, double humidity, double windSpeed, String condition) {
+    public Weather(String city, double temperature, double humidity,
+                    double windSpeed, String condition) {
         this.city = city;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -21,9 +22,19 @@ public class Weather {
                 city, temperature, humidity, windSpeed, condition);
     }
 
-    public String getCity() { return city; }
-    public double getTemperature() { return temperature; }
-    public double getHumidity() { return humidity; }
-    public double getWindSpeed() { return windSpeed; }
-    public String getCondition() { return condition; }
+    public String getCity() {
+        return city;
+    }
+    public double getTemperature() {
+        return temperature;
+    }
+    public double getHumidity() {
+        return humidity;
+    }
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+    public String getCondition() {
+        return condition;
+    }
 }
